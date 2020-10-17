@@ -15,6 +15,7 @@ A week starts on Monday midnight and last 7 days.
 To run the server, first you should setup `GOPATH` environment variable to the project root.
 Then install some packages and then 
 ```
+export GOPATH=`pwd`
 go get -u gorm.io/gorm
 go get -u gorm.io/driver/sqlite
 go get -u github.com/gorilla/mux
