@@ -1,0 +1,35 @@
+@startuml
+actor user as "User"
+participant rest as "FundAccountApi"
+participant logic as "FundAccount"
+participant model as "FundModel"
+
+user -> rest: FundRequest
+activate rest
+rest -> rest: convert FundRequest \nto Fund model
+rest -> logic: Check Fund validity
+    activate logic
+    logic -> model: check if fund with this \ncustomer_id and id exists
+    alt fund with customer_id and id exists
+      model --> logic: return error
+      logic --> rest: return error
+      rest --> user: return no response
+    else fund with customer_id and id does not exist
+      logic -> model: check sum and count of \naccepted funds that day
+      activate model
+        model --> logic: daySum, dayCount
+      deactivate model
+      logic -> model: check sum of accepted \nfunds that week
+      activate model
+        model --> logic: weekSum
+      deactivate model
+      logic -> logic: Check that daySum, dayCount \nand weekSum fulfill requirements
+      logic -> model: write new fund with accepted value to DB
+      logic --> rest: return accepted/not accepted
+    deactivate logic
+      rest -> rest: build FundResponse
+      rest --> user: FundResponse json
+    end
+
+deactivate rest
+@enduml

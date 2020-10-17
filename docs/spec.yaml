@@ -1,0 +1,83 @@
+openapi: 3.0.0
+servers:
+  - description: KOHO velocity limits API
+    url: https://localhost:5000
+info:
+  description: velocity limits API
+  version: "1.0.0"
+  title: velocity limits API
+  contact:
+    email: daniel.maruani@gmail.com
+
+tags:
+  - name: funding
+    description: API to fund an account
+paths:
+  /fund:
+    post:
+      tags:
+        - funding
+      summary: fund an account
+      operationId: fundAccount
+      description: Fund an account with certain amount
+      responses:
+        '200':
+          description: Funding request processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fundResponse'
+        '400':
+          description: 'invalid input, object invalid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/fundRequest'
+        description: Inventory item to add
+
+components:
+  schemas:
+    fundRequest:
+      type: object
+      required:
+        - id
+        - customer_id
+        - load_amount
+        - time
+      properties:
+        id:
+          type: string
+          format: number
+          example: "1234"
+        customer_id:
+          type: string
+          format: number
+          example: "1234"
+        load_amount:
+          type: string
+          format: currency
+          example: "$123.45"
+        time:
+          type: string
+          format: date-time
+          example: "2018-01-01T00:00:00Z"
+    fundResponse:
+      type: object
+      required:
+        - id
+        - customer_id
+        - accepted
+      properties:
+        id:
+          type: string
+          format: number
+          example: "1234"
+        customer_id:
+          type: string
+          format: number
+          example: "1234"
+        accepted:
+          type: string
+          format: boolean
+          example: true

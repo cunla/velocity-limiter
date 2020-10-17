@@ -1,0 +1,7 @@
+### Http requests samples
+
+POST localhost:8080/api/fund
+Content-Type: application/json
+
+{"id":"15887","customer_id":"528","load_amount":"$3318.47","time":"2000-01-01T00:00:00Z"}
+
