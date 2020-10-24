@@ -1,8 +1,8 @@
 package test
 
 import (
-	logic "../go/logic"
-	model "../go/model"
+	logic "../logic"
+	model "../model"
 	"testing"
 	"time"
 )
