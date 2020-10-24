@@ -15,14 +15,14 @@ A week starts on Monday midnight and last 7 days.
 To run the server, first you should setup `GOPATH` environment variable to the project root.
 Then install some packages and then 
 ```
-export GOPATH=`pwd`
-go get -u gorm.io/gorm
-go get -u gorm.io/driver/sqlite
-go get -u github.com/gorilla/mux
-go run main.go
+go run commands/runserver.go
 ```
 
 The server is running by default on port 8080, it can be changed on `main.go` file.
+
+## Running with docker
+It is possible to run using `docker-compose up` as well.
+The container will recompile on changes.
 
 # Usage: REST API
 
@@ -69,7 +69,6 @@ entries from the DB once they are a week old.
 
 
 # Next steps (missing)
-* dockerize
-* get `go mod` to work
 * write integration tests
 * enrich and compile godoc
+* Distributed lock management
